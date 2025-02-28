@@ -10,8 +10,8 @@
       </div>
       <div class="flex justify-between items-center mt-12 text-gray-600 text-sm">
         <div class="flex gap-2">
-            <span class="text-green-600">&#x1F44D; {{ posts.reactions.likes }}</span>
-            <span class="text-red-600">&#x1F44E; {{ posts.reactions.dislikes }}</span>
+            <span class="text-green-600">&#x1F44D; {{ posts?.reactions?.likes }}</span>
+            <span class="text-red-600">&#x1F44E; {{ posts?.reactions?.dislikes }}</span>
           </div>
         <div>
           <span class="font-bold">Views:</span> {{ posts.views }}
