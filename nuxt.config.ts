@@ -4,5 +4,12 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores'], 
   },
-  modules: ['@pinia/nuxt']
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+  ],
+  tailwindcss: {
+    // Options
+  }
+  
 })
