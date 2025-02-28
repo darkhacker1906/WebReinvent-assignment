@@ -1,12 +1,11 @@
 <template>
 <div>
-
 <div class="mt-16 p-4 overflow-y-auto">
     <div class="flex flex-wrap gap-4 justify-center cursor-pointer">
       <div 
         v-for="data in posts" 
         :key="data.id" 
-        class="w-80 bg-white border border-gray-300 rounded-lg p-4 shadow-md flex flex-col justify-between" @click="singlePostDetils(data.id)">
+        class="w-80 bg-white border border-gray-300 rounded-lg p-4 shadow-md flex flex-col justify-between" @click="singlePostDetails(data.id)">
         
         <h2 class="text-lg font-bold text-gray-800">{{ data.title }}</h2>
         <p class="text-gray-600 mt-2 line-clamp-4">{{ data.body }}</p>
@@ -15,7 +14,7 @@
           <span 
             v-for="tag in data.tags" 
             :key="tag" 
-            class="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-md text-sm mr-2">
+            class="inline-block bg-blue-200 text-blue-700 px-2 py-1 rounded-md text-sm mr-2">
             #{{ tag }}
           </span>
         </div>
@@ -34,11 +33,9 @@
 
 </template>
 <script>
-import navbar from '~/components/navbar.vue';
 import { useItemList } from '~/stores/itemList'
 
 export default {
-  components: { navbar },
   data() {
     return {
       itemList: useItemList() 
@@ -53,10 +50,10 @@ export default {
         return this.itemList.items;
     }
   },
-  method:{
-   singlePostDetils(id){
+  methods:{
+    singlePostDetails(id){
     console.log(id,"ids======");
-    this.$router.push({name: '/posts', params: {id: id}});
+    this.$router.push({ path: `/posts/${id}` });
    }
   }
 }
