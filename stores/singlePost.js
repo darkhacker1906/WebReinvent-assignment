@@ -1,12 +1,23 @@
 import { defineStore } from 'pinia'
+import { useLoadingStore } from './loading';
 export const singleItemList = defineStore('post', {
   state: () => ({ 
     post: []
    }),
   actions: {
     async getSinglePosts(id) {
-      const response = await $fetch(`https://dummyjson.com/posts/${id}`);
-      this.post=response;
+      const loadingStore = useLoadingStore();
+      try{
+        loadingStore.startLoading();
+        const response = await $fetch(`https://dummyjson.com/posts/${id}`);
+        this.post=response;
+      }catch(error){
+        console.error(error);
+      }finally{
+        console.log('finally',loadingStore.$state.loading);
+        loadingStore.stopLoading();
+      }
+     
     },
   },
 })

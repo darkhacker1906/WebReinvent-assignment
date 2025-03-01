@@ -1,6 +1,9 @@
 <template>
  <div class="flex items-center justify-center  min-h-screen bg-gray-100">
-    <div class="bg-white shadow-lg rounded-lg p-6 w-[800px] flex flex-col">
+  <div v-if="loading">
+   <loader/>
+  </div>
+    <div  v-else class="bg-white shadow-lg rounded-lg p-6 w-[800px] flex flex-col hover:bg-slate-100">
       <h2 class="text-xl font-bold text-gray-800">{{ posts.title }}</h2>
       <p class="text-gray-600 mt-6">{{ posts.body }}</p>
       <div class="mt-10">
@@ -26,6 +29,8 @@
 
 <script>
 import { singleItemList } from '~/stores/singlePost'
+import loader from '~/components/loader.vue';
+import { useLoadingStore } from '../../stores/loading';
 
 export default {
   data() {
@@ -41,6 +46,10 @@ export default {
     posts(){
         console.log(this.post.post);
         return this.post.post;
+    },
+    loading(){
+      console.log(useLoadingStore().loading);
+      return useLoadingStore().loading;
     }
   },
  

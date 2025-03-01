@@ -1,11 +1,15 @@
 <template>
 <div>
-<div class="mt-16 p-4 overflow-y-auto">
+  <div v-if="loading" class="flex justify-center items-center h-screen">
+  <loader/>
+   </div>
+<div v-else  class="mt-16 p-4 overflow-y-auto" >
     <div class="flex flex-wrap gap-4 justify-center cursor-pointer">
       <div 
         v-for="data in posts" 
         :key="data.id" 
-        class="w-80 bg-white border border-gray-300 rounded-lg p-4 shadow-md flex flex-col justify-between" @click="singlePostDetails(data.id)">
+        class="w-80 bg-white border border-gray-300 rounded-lg p-4 shadow-md flex flex-col justify-between 
+        hover:bg-slate-100" @click="singlePostDetails(data.id)">
         
         <h2 class="text-lg font-bold text-gray-800">{{ data.title }}</h2>
         <p class="text-gray-600 mt-2 line-clamp-4">{{ data.body }}</p>
@@ -33,9 +37,12 @@
 
 </template>
 <script>
-import { useItemList } from '~/stores/itemList'
+import loader from '~/components/loader.vue';
+import { useItemList } from '~/stores/itemList';
+import { useLoadingStore } from '~/stores/loading';
 
 export default {
+  components: { loader },
   data() {
     return {
       itemList: useItemList() 
@@ -48,6 +55,9 @@ export default {
     posts(){
         console.log(this.itemList.items);
         return this.itemList.items;
+    },
+    loading(){
+      return useLoadingStore().loading;
     }
   },
   methods:{
