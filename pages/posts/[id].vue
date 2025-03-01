@@ -44,11 +44,9 @@ export default {
   },
   computed:{
     posts(){
-        console.log(this.post.post);
         return this.post.post;
     },
     loading(){
-      console.log(useLoadingStore().loading);
       return useLoadingStore().loading;
     }
   },

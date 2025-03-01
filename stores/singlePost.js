@@ -14,7 +14,6 @@ export const singleItemList = defineStore('post', {
       }catch(error){
         console.error(error);
       }finally{
-        console.log('finally',loadingStore.$state.loading);
         loadingStore.stopLoading();
       }
      
